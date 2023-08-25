@@ -19,7 +19,7 @@ To update the database from the root folder:
 dotnet ef database update --startup-project WebApi
 ```
 
-## Descripción general
+## Overview
 
 ### Domain
 This will contain all entities, enums, exceptions, interfaces, types and logic specific to the domain layer.
