@@ -5,9 +5,9 @@ namespace Application.UseCase.Products.Commands.Create;
 
 public class CreateProductCommand : IRequest<Response<long>>
 {
-    public string Nombre { get; set; }
-    public string Descripcion { get; set; }
-    public double Precio { get; set; }
-    public long Categoria { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public double Price { get; set; }
+    public long CategoryId { get; set; }
     public int Stock { get; set; }
 }

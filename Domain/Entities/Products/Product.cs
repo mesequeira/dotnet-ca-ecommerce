@@ -1,10 +1,10 @@
-﻿namespace Domain.Entities.Products;
+﻿using Domain.Entities.Categories;
 
-public class Product
+namespace Domain.Entities.Products;
+
+public class Product : BaseAuditableEntity
 {
-    public long Id { get; set; }
-    public string Nombre { get; set; }
-    public string Descripcion { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
     public virtual Category Category { get; set; }
-
 }
