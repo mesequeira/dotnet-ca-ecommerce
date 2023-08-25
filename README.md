@@ -3,17 +3,17 @@ This project showcases a robust and scalable eCommerce application API built on 
 
 ## Configuración de la base de datos
 
-Verifica que la cadena de conexión `DefaultConnection` dentro de `appsettings.json` apunte a una instancia válida de SQL Server.
+Verify that the `DefaultConnection` connection string within `appsettings.json` points to a valid SQL Server instance.
 
-## Migrations
+## Database Migrations
 
-Para agregar una nueva migración desde el root de la aplicación:
+For example, to add a new migration from the root folder:
 
 ```sh
 dotnet ef migrations add "SampleMigration" --startup-project WebApi --project Infrastructure --output-dir Persistence\Migrations
 ```
 
-Para hacer un update de la base de datos desde el root de la aplicación:
+To update the database from the root folder:
 
 ```sh
 dotnet ef database update --startup-project WebApi
@@ -22,16 +22,16 @@ dotnet ef database update --startup-project WebApi
 ## Descripción general
 
 ### Domain
-Contiene todas las entidades, enums, excepciones, interfaces, tipos y lógica específica de la capa de Domain.
+This will contain all entities, enums, exceptions, interfaces, types and logic specific to the domain layer.
 
 ### Application
-Contiene toda la lógica de negocio. Es dependiente de la capa de Domain, pero no tiene dependencias en ninguna otra capa o proyecto. Define las interfaces que van a ser implementadas en las capas exteriores. Por ejemplo, si Application necesita acceder a un products service, una nueva interface será instanciada y su implementacion será creada en Infrastructure.
+This layer contains all application logic. It is dependent on the domain layer, but has no dependencies on any other layer or project. This layer defines interfaces that are implemented by outside layers. For example, if the application need to access a notification service, a new interface would be added to application and an implementation would be created within infrastructure.
 
 ### Infrastructure
-Esta capa contiene clases para acceder a recursos externos como archivos de sistemas, web services, smpt, etc. Estas clases tienen que tener su interface definida en la capa de Application.
+This layer contains classes for accessing external resources such as file systems, web services, smtp, and so on. These classes should be based on interfaces defined within the application layer.
 
 ### WebApi
-Esta capa depende de las capas de Application e Infrastructure; sin embargo, la dependencia de Infrastructure es solo para la inyección de dependencia. Entonces, sólo Startup.cs debe hacer referencia a Infrastructure.
+This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only Startup.cs should reference Infrastructure.
 
 - [ASP .NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
 - [Entity Framework Core 7](https://learn.microsoft.com/en-us/ef/core/)
