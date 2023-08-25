@@ -33,7 +33,7 @@ This layer contains classes for accessing external resources such as file system
 ### WebApi
 This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only Startup.cs should reference Infrastructure.
 
-### Technologies
+## Technologies
 - [ASP .NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
 - [Entity Framework Core 7](https://learn.microsoft.com/en-us/ef/core/)
 - [MediatR](https://github.com/jbogard/MediatR)
