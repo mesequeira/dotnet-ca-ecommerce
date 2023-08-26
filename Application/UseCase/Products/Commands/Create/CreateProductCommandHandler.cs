@@ -23,7 +23,7 @@ internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProduc
 
     public async Task<Response> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var product = _mapper.Map<Product>(request);
+        var product = _mapper.Map<Product>(request.Product);
 
         await _productRepository.AddAsync(product);
 
