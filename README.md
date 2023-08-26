@@ -33,11 +33,23 @@ This layer contains classes for accessing external resources such as file system
 ### WebApi
 This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only Startup.cs should reference Infrastructure.
 
+## Authentication
+This project used Firebase to handle the authorization. If you want to check the endpoints you'll need to configure you [FireBase Configuration](https://console.firebase.google.com/).
+
+At the appsetings.development.json you'll find the section to put your TokenUri, Audience and ValidIssuer
+
+```sh
+"Authentication": {
+    "TokenUri": "YOUR-TOKEN-URI",
+    "Audience": "YOUR-AUDIENCE",
+    "ValidIssuer": "YOUR-VALID-ISSUER"
+}
+```
+
 ## Technologies
 - [ASP .NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
 - [Entity Framework Core 7](https://learn.microsoft.com/en-us/ef/core/)
 - [MediatR](https://github.com/jbogard/MediatR)
 - [AutoMapper](https://automapper.org/)
 - [FluentValidation](https://docs.fluentvalidation.net/en/latest/)
-
 
