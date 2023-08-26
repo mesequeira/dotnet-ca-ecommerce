@@ -1,9 +1,8 @@
-﻿
-using Domain.Shared;
+﻿using Domain.Shared;
 using Domain.Shared.Errors;
 using Domain.Shared.Validation;
 
-namespace Application.Common.Behaviors;
+namespace Application.Abstractions.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 where TRequest : IRequest<TResponse>
@@ -44,9 +43,9 @@ where TRequest : IRequest<TResponse>
                                     .GetGenericTypeDefinition()
                                     .MakeGenericType(typeof(TResult).GenericTypeArguments[0])
                                     .GetMethod(nameof(ValidationResult.WithErrors))
-                                    .Invoke(null, new object?[] { errors })!;
+                                    .Invoke(null, new object[] { errors })!;
 
-        return (TResult) validationReuslt;
+        return (TResult)validationReuslt;
 
 
     }

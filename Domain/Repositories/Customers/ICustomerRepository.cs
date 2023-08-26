@@ -1,6 +1,8 @@
-﻿namespace Domain.Repositories.Customers;
+﻿using Domain.Entities.Customers;
+
+namespace Domain.Repositories.Customers;
 
 public interface ICustomerRepository
 {
-    Task Add();
+    Task AddAsync(Customer customer);
 }

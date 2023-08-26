@@ -2,7 +2,6 @@
 using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Products;
 using Domain.Repositories.Products;
-using Domain.Shared;
 using System.Net;
 
 namespace Application.UseCase.Products.Commands.Create;

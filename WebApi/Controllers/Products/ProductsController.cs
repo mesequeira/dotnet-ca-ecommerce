@@ -1,10 +1,12 @@
 ﻿using Application.UseCase.Products.Commands.Create;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Products;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductsController : ApplicationBaseController
 {
     [HttpPost]
