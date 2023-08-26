@@ -36,7 +36,7 @@ This layer depends on both the Application and Infrastructure layers, however, t
 ## Authentication
 This project used Firebase to handle the authorization. If you want to check the endpoints you'll need to configure your [FireBase Configuration](https://console.firebase.google.com/).
 
-At the appsetings.development.json you'll find the section to put your TokenUri, Audience and ValidIssuer
+At the `appsetings.development.json` you'll find the section to put your TokenUri, Audience and ValidIssuer
 
 ```sh
 "Authentication": {
