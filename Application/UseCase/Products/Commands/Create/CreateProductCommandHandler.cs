@@ -1,35 +1,38 @@
-﻿using Application.Common.Models.Response;
-using AutoMapper;
+﻿
+using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Products;
 using Domain.Repositories.Products;
-using MediatR;
-using Serilog;
 using System.Net;
 
 namespace Application.UseCase.Products.Commands.Create;
 
-public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<long>>
+internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response>
 {
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateProductCommandHandler(ILogger logger, IMapper mapper, IProductRepository productRepository)
+    public CreateProductCommandHandler(ILogger logger, IMapper mapper, IProductRepository productRepository, IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _mapper = mapper;
         _productRepository = productRepository;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<Response<long>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = _mapper.Map<Product>(request);
+
         await _productRepository.AddAsync(product);
 
-        return new Response<long>()
+        var saved = await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new Response()
         {
             Content = product.Id,
-            StatusCode = HttpStatusCode.OK,
+            StatusCode = saved ? HttpStatusCode.OK : HttpStatusCode.InternalServerError,
         };
     }
 }

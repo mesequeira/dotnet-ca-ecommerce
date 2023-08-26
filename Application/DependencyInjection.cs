@@ -1,5 +1,6 @@
-﻿using FluentValidation;
+﻿using Application.Abstractions.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application;
 
@@ -7,14 +8,19 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        var assembly = typeof(DependencyInjection).Assembly;
         
         services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssemblies(assembly));
+            cfg.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReference>());
 
-        services.AddValidatorsFromAssembly(assembly);
+        services.AddScoped(
+            typeof(IPipelineBehavior<,>),
+            typeof(ValidationBehavior<,>)
+        );
 
-        services.AddAutoMapper(assembly);
+        services.AddValidatorsFromAssemblyContaining<ApplicationAssemblyReference>(includeInternalTypes: true);
+        
+
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         return services;
     }

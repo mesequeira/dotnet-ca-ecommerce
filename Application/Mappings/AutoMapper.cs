@@ -8,6 +8,7 @@ public class AutoMapper : Profile
 {
     public AutoMapper()
     {
-        CreateMap<CreateProductCommand, Product>();
+        CreateMap<CreateProductCommand, Product>()
+            .ReverseMap();
     }
 }
