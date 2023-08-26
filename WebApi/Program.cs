@@ -18,6 +18,7 @@ builder.Host
     .UseSerilog((ctx, cfg) => 
         cfg.ReadFrom.Configuration(ctx.Configuration));
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,8 +32,10 @@ app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.Run();
