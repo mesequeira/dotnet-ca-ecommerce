@@ -1,8 +1,6 @@
 ﻿using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Products;
 using Domain.Repositories.Products;
-using Domain.Shared;
-using System.Net;
 
 namespace Application.UseCase.Products.Commands.Update;
 
@@ -28,16 +26,16 @@ internal sealed class UpdateProductCommandHandler : IRequestHandler<UpdateProduc
         if(result is null)
         {
             response.StatusCode = HttpStatusCode.NotFound;
-            response.Message = $"The product #{request.ProductId} could not be found.";
+            response.Message = "The specified product was not found";
             return response;
         }
 
-        var product = _mapper.Map<Product>(request);
+        var product = _mapper.Map<Product>(request.Product);
         _productRepository.UpdateAsync(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         response.StatusCode = HttpStatusCode.OK;
-        response.Message = $"The product #{request.ProductId} was succesfully updated.";
+        response.Message = $"The specified product was succesfully updated.";
         return response;
 
     }

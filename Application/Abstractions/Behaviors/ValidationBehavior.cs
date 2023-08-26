@@ -18,8 +18,8 @@ where TRequest : IRequest<TResponse>
             return await next();
 
         Error[] errors = _validators
-            .Select(validator => validator.Validate(request))
-            .SelectMany(validationResult => validationResult.Errors)
+            .Select(async validator => await validator.ValidateAsync(request))
+            .SelectMany(validationResult => validationResult.Result.Errors)
             .Where(validationFailure => validationFailure is not null)
             .Select(failure => new Error(failure.PropertyName, failure.ErrorMessage))
             .Distinct()
