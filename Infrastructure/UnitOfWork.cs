@@ -1,11 +1,17 @@
 ﻿using Domain.Abstractions.UnitOfWork;
+using Infrastructure.Persistence;
 
 namespace Infrastructure;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {
-    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    private readonly ApplicationDbContext _context;
+
+    public UnitOfWork(ApplicationDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
+
+    public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        await _context.SaveChangesAsync(cancellationToken) > 0;
 }
