@@ -1,13 +1,15 @@
-﻿using Domain.Repositories.Products;
+﻿using Application.UseCase.Products.Commands.Create;
+using FluentValidation;
 
-namespace Application.UseCase.Products.Commands.Create;
+namespace Application.UseCase.Products.Commands.Update;
 
-public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
-    public CreateProductCommandValidator(IProductRepository _productRepository)
+    public UpdateProductCommandValidator()
     {
         RuleFor(product => product.Name)
             .NotEmpty()
+            .NotNull()
             .WithMessage("The product name can not be empty")
             .MinimumLength(5)
             .WithMessage("Name need be longer than 5 characters.")
@@ -19,9 +21,5 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .WithMessage("Description need be longer than 25 characters.")
             .MaximumLength(4000)
             .WithMessage("Description cannot be longer than 4000 characters.");
-
-        RuleFor(product => product.Sku)
-            .MustAsync(async (sku, _) => await _productRepository.IsSkuUniqueAsync(sku))
-            .WithMessage("The Sku must be unique.");
     }
 }

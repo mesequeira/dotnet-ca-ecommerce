@@ -1,10 +1,10 @@
 ﻿using System.Net;
 
-namespace Application.Common.Models.Response;
+namespace Domain.Shared;
 
-public class Response<T>
+public class Response
 {
-    public T Content { get; set; }
+    public object Content { get; set; }
     public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
     public string Message { get; set; }
 }
