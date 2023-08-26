@@ -21,20 +21,17 @@ public class Product : BaseAuditableEntity
     public string Sku { get; set; }
 
     [Required]
-    public bool Status
-    {
-        get => Inventory?.Quantity > 0;
-    }
+    public bool Status { get; set; }
 
     [Required]
     [Range(0.0, double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}.")]
     public double Price { get; set; }
 
     [ForeignKey(nameof(Category))]
-    public long CategoryId { get; set; }
+    public long? CategoryId { get; set; }
 
     [ForeignKey(nameof(Discount))]
-    public long DiscountId { get; set; }
+    public long? DiscountId { get; set; }
     
     [ForeignKey(nameof(Inventory))]
     public long InventoryId { get; set; }

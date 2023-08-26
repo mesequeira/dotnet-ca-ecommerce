@@ -1,7 +1,5 @@
 ﻿using Domain.Abstractions.UnitOfWork;
 using Domain.Repositories.Products;
-using Domain.Shared;
-using System.Net;
 
 namespace Application.UseCase.Products.Commands.Delete;
 
@@ -25,7 +23,7 @@ internal sealed class DeleteProductCommandHandler : IRequestHandler<DeleteProduc
         if (product is null)
         {
             response.StatusCode = HttpStatusCode.NotFound;
-            response.Message = $"The product #{request.ProductId} could not be found.";
+            response.Message = "The specified product was not found";
             return response;
         }
 
@@ -33,7 +31,7 @@ internal sealed class DeleteProductCommandHandler : IRequestHandler<DeleteProduc
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         response.StatusCode = HttpStatusCode.OK;
-        response.Message = $"The product #{request.ProductId} was succesfully deleted.";
+        response.Message = "The specified product was succesfully deleted.";
         return response;
     }
 }

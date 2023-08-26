@@ -36,7 +36,7 @@ internal sealed class ProductRepository : IProductRepository
                 .Include(p => p.Category)
                 .Include(p => p.Inventory)
                 .Include(p => p.Discount)
-                .FirstAsync(prod => prod.Id == id);
+                .FirstOrDefaultAsync(prod => prod.Id == id);
 
     public async Task<bool> IsSkuUniqueAsync(string sku) =>
         !await _context.Products.AnyAsync(p => p.Sku == sku);

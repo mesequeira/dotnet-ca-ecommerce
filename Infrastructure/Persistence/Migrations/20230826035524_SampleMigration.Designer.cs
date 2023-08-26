@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230826035524_SampleMigration")]
+    partial class SampleMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,7 +136,7 @@ namespace Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("CategoryId")
+                    b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
@@ -143,7 +146,7 @@ namespace Infrastructure.Persistence.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("nvarchar(4000)");
 
-                    b.Property<long?>("DiscountId")
+                    b.Property<long>("DiscountId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("InventoryId")
@@ -182,11 +185,15 @@ namespace Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Categories.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Products.Discounts.Discount", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountId");
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Products.Inventories.Inventory", "Inventory")
                         .WithMany()
