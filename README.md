@@ -1,6 +1,9 @@
 # dotnet-ca-ecommerce
 This project showcases a robust and scalable eCommerce application API built on the latest .NET 7 framework. Designed with a focus on maintainability and extensibility, this API employs the Clean Architecture principles, along with CQRS (Command Query Responsibility Segregation) and MediatR to deliver a cutting-edge solution.
 
+# Frontend Project
+If you want a more inmersive experience fetching the data from this API you can run a frontend application created for this project called [react-ecommerce](https://github.com/mesequeira/react-ecommerce)
+
 ## Database Configuration
 
 Verify that the `DefaultConnection` connection string within `appsettings.json` points to a valid SQL Server instance.
