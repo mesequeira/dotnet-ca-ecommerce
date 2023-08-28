@@ -21,7 +21,7 @@ where TRequest : IRequest<TResponse>
             .Select(async validator => await validator.ValidateAsync(request))
             .SelectMany(validationResult => validationResult.Result.Errors)
             .Where(validationFailure => validationFailure is not null)
-            .Select(failure => new Error(failure.PropertyName, failure.ErrorMessage))
+            .Select(failure => new Error(failure.ErrorMessage, failure.PropertyName))
             .Distinct()
             .ToArray();
 
