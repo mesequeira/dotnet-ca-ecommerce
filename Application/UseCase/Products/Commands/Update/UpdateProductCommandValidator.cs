@@ -22,7 +22,14 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
             .WithMessage("Description cannot be longer than 4000 characters.");
         
         RuleFor(m => m.Product.Sku)
-            .MustAsync(async (sku, _) => await _productRepository.IsSkuUniqueAsync(sku))
+            .MustAsync(async (command, sku, _) =>
+            {
+                var product = await _productRepository.GetByIdAsync(command.ProductId);
+
+                if(product.Sku != sku)
+                    return await _productRepository.IsSkuUniqueAsync(sku);
+                return true;
+            })
             .WithMessage("The Sku must be unique.");
     }
 }

@@ -22,6 +22,7 @@ public class AutoMapper : Profile
 
         #region Entities to Dtos
         CreateMap<ProductDto, Product>()
+            .ForMember(src => src.Id, opt => opt.MapFrom(src => src.ProductId))
             .ReverseMap();
 
         CreateMap<InventoryDto, Inventory>()
