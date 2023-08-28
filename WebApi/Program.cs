@@ -38,4 +38,13 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+
+app.UseCors(builder =>
+{
+    builder.WithOrigins("http://localhost:5173") // Cambia esto al dominio correcto
+           .AllowAnyHeader()
+           .AllowAnyMethod()
+           .AllowCredentials(); // Si es necesario incluir cookies en las solicitudes
+});
+
 app.Run();

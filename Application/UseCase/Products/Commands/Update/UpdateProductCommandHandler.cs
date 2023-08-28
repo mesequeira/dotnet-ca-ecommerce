@@ -31,6 +31,7 @@ internal sealed class UpdateProductCommandHandler : IRequestHandler<UpdateProduc
         }
 
         var product = _mapper.Map<Product>(request.Product);
+        product.Id = request.ProductId;
         _productRepository.UpdateAsync(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
