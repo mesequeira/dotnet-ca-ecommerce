@@ -10,7 +10,10 @@ internal sealed class UpdateProductCommandHandler : IRequestHandler<UpdateProduc
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public UpdateProductCommandHandler(IProductRepository productRepository, IMapper mapper, IUnitOfWork unitOfWork)
+    public UpdateProductCommandHandler(
+        IProductRepository productRepository, 
+        IMapper mapper, 
+        IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
         _mapper = mapper;
