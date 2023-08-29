@@ -2,10 +2,12 @@
 using Domain.Repositories.Categories;
 using Domain.Repositories.Customers;
 using Domain.Repositories.Discounts;
+using Domain.Repositories.Orders;
 using Domain.Repositories.Products;
 using Infrastructure.Repositories.Categories;
 using Infrastructure.Repositories.Customers;
 using Infrastructure.Repositories.Discounts;
+using Infrastructure.Repositories.Orders;
 using Infrastructure.Repositories.Products;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +21,7 @@ public static class InterfaceDependency
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IDiscountRepository, DiscountRepository>();
         services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }
