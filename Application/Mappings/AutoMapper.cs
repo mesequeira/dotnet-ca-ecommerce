@@ -1,9 +1,13 @@
 ﻿using Application.UseCase.Products.Commands.Create;
+using Domain.Dtos.Orders;
+using Domain.Dtos.Orders.Items;
 using Domain.Dtos.Products;
 using Domain.Dtos.Products.Categories;
 using Domain.Dtos.Products.Discounts;
 using Domain.Dtos.Products.Inventories;
 using Domain.Entities.Categories;
+using Domain.Entities.Orders;
+using Domain.Entities.Orders.Items;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Discounts;
 using Domain.Entities.Products.Inventories;
@@ -32,6 +36,12 @@ public class AutoMapper : Profile
             .ReverseMap();
 
         CreateMap<CategoryDto, Category>()
+            .ReverseMap();
+
+        CreateMap<OrderDto, Order>()
+            .ReverseMap();
+
+        CreateMap<OrderItemDto, OrderItem>()
             .ReverseMap();
         #endregion
     }
