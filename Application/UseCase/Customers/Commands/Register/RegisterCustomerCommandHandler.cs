@@ -36,7 +36,7 @@ internal sealed class RegisterCustomerCommandHandler : IRequestHandler<RegisterC
 
         return new Response()
         {
-            StatusCode = HttpStatusCode.OK,
+            StatusCode = HttpStatusCode.Created,
             Message = "The customer was succesfully created"
         };
     }

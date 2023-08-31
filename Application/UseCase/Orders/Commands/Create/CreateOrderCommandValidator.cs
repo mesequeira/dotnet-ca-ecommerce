@@ -12,12 +12,17 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 
                 if (product is null)
                 {
-                    context.AddFailure($"Invalid product Id {item.ProductId} in OrderItems");
+                    context.AddFailure($"Invalid product Id {item.ProductId} in OrderItems.");
                 }
 
                 if (item.Quantity > product.Inventory.Quantity)
                 {
-                    context.AddFailure($"The quantity selected for product {product.Name} exceeds the available stock");
+                    context.AddFailure($"The quantity selected for product {product.Name} exceeds the available stock.");
+                }
+
+                if(item.UnitPrice != product.Price)
+                {
+                    context.AddFailure($"The price for the product {product.Name} is not equal to the original product.");
                 }
             })
             .Custom((orderItem, context) =>
@@ -31,5 +36,6 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
                     context.AddFailure($"You add multiple times the product {orderItem.ProductId} for the same order.");
                 }
             });
+            
     }
 }

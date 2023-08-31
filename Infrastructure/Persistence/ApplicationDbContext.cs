@@ -2,6 +2,7 @@
 using Domain.Entities.Customers;
 using Domain.Entities.Orders;
 using Domain.Entities.Orders.Items;
+using Domain.Entities.Payments;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Discounts;
 using Domain.Entities.Products.Inventories;
@@ -23,6 +24,7 @@ internal sealed class ApplicationDbContext : DbContext
     public DbSet<Inventory> Inventories { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Payment> Payments { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

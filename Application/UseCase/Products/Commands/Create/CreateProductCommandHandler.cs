@@ -39,7 +39,7 @@ internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProduc
         return new Response()
         {
             Content = product.Id,
-            StatusCode = HttpStatusCode.OK,
+            StatusCode = HttpStatusCode.Created,
             Message = "The specified product was succesfully created."
         };
     }

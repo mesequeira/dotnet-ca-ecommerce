@@ -37,7 +37,7 @@ internal sealed class CreateOrderCommandHandler : IRequestHandler<CreateOrderCom
         return new Response
         {
             Content = order.Id,
-            StatusCode = HttpStatusCode.OK,
+            StatusCode = HttpStatusCode.Created,
             Message = "The specified order was successfully created."
         };
     }
