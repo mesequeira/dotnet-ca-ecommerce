@@ -1,10 +1,12 @@
 ﻿using Application.UseCase.Discounts.Queries.GetAll;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Discounts;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class DiscountsController : ApplicationBaseController
 {
 

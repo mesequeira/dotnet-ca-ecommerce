@@ -2,12 +2,14 @@
 using Application.UseCase.Orders.Commands.Update;
 using Application.UseCase.Orders.Queries.Get;
 using Application.UseCase.Orders.Queries.GetAll;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Orders;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class OrdersController : ApplicationBaseController
 {
     [HttpPost]
