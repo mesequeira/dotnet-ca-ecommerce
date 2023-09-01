@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Application;
 
@@ -20,7 +19,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssemblyContaining<ApplicationAssemblyReference>(includeInternalTypes: true);
         
 
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(ApplicationAssemblyReference.Assembly);
 
         return services;
     }

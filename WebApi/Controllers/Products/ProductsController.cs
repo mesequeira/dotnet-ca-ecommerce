@@ -3,12 +3,14 @@ using Application.UseCase.Products.Commands.Update;
 using Application.UseCase.Products.Queries.Get;
 using Application.UseCase.Products.Queries.GetAll;
 using Domain.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Products;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductsController : ApplicationBaseController
 {
     [HttpPost]

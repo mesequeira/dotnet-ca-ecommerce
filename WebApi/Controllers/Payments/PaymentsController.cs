@@ -7,7 +7,7 @@ namespace WebApi.Controllers.Payments;
 
 [ApiController]
 [Route("api/[controller]")]
-[AllowAnonymous]
+[Authorize]
 public class PaymentsController : ApplicationBaseController
 {
     [HttpPost]
