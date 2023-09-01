@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces.Payment;
+﻿using Application.Common.Interfaces.Authentication;
+using Application.Common.Interfaces.Payment;
 using Domain.Abstractions.UnitOfWork;
 using Domain.Repositories.Categories;
 using Domain.Repositories.Customers;
@@ -10,6 +11,7 @@ using Infrastructure.Repositories.Customers;
 using Infrastructure.Repositories.Discounts;
 using Infrastructure.Repositories.Orders;
 using Infrastructure.Repositories.Products;
+using Infrastructure.Services.Authentication;
 using Infrastructure.Services.Payments;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,6 +27,7 @@ public static class InterfaceDependency
         services.AddScoped<ICategoriesRepository, CategoriesRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }

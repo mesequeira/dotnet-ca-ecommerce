@@ -1,8 +1,8 @@
-﻿using Application.Abstractions.Authentication;
+﻿using Application.Common.Interfaces.Authentication;
 using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Customers;
 using Domain.Repositories.Customers;
-using System.Net;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Application.UseCase.Customers.Commands.Register;
 
@@ -21,21 +21,11 @@ internal sealed class RegisterCustomerCommandHandler : IRequestHandler<RegisterC
 
     public async Task<Response> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
     {
-        var identityId = await _authenticationService.RegisterAsync(request.Email, request.Password);
-
-        var customer = new Customer()
-        {
-            Email = request.Email,
-            IdentityId = identityId,
-            Name = request.Name
-        };
-
-        await _customerRepository.AddAsync(customer);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
+        var identityId = _authenticationService.RegisterAsync(request.Email);
 
         return new Response()
         {
+            Content = identityId,
             StatusCode = HttpStatusCode.Created,
             Message = "The customer was succesfully created"
         };

@@ -1,10 +1,12 @@
 ﻿using Application.UseCase.Categories.Queries.GetAll;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Categories;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class CategoriesController : ApplicationBaseController
 {
 
