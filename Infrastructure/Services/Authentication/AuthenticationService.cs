@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Authentication;
 using Application.Options;
+using Domain.Repositories.Customers;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,14 +11,17 @@ namespace Infrastructure.Services.Authentication;
 internal sealed class AuthenticationService : IAuthenticationService
 {
     private readonly JwtSettings _jwtSettings;
+    private readonly ICustomerRepository _customerRepository;
 
-    public AuthenticationService(JwtSettings jwtSettings)
+    public AuthenticationService(JwtSettings jwtSettings, ICustomerRepository customerRepository)
     {
         _jwtSettings = jwtSettings;
+        _customerRepository = customerRepository;
     }
 
-    public object RegisterAsync(string email)
+    public async Task<string> CreateTokenJwt(string email)
     {
+        var customer = await _customerRepository.GetByEmailAsync(email);
 
         var jwtHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
@@ -25,25 +29,21 @@ internal sealed class AuthenticationService : IAuthenticationService
         var claims = new List<Claim>
         {
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-               new Claim("userId", email)
-            };
+               new Claim("userId", customer.Id.ToString()),
+               new Claim(ClaimTypes.Role, customer.Rol.Name)
+        };
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Audience = "https://www.msequeira.dev",
-            Expires = DateTime.Now.Add(_jwtSettings.TokenLifetime),
+            Expires = DateTime.Now.AddDays(1),
             SigningCredentials =
             new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
+        var securityToken = jwtHandler.CreateToken(tokenDescriptor);
 
-        var token = jwtHandler.CreateToken(tokenDescriptor);
-
-        return Task.FromResult(new 
-        {
-            IsSuccess = true,
-            Token = jwtHandler.WriteToken(token)
-        });
+        return jwtHandler.WriteToken(securityToken);
     }
 }

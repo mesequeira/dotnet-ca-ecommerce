@@ -1,5 +1,4 @@
 ﻿using Application.UseCase.Payments.Commands.Create;
-using Application.UseCase.Products.Commands.Create;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +6,8 @@ namespace WebApi.Controllers.Payments;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Customer")]
+[Authorize(Roles = "Administrator")]
 public class PaymentsController : ApplicationBaseController
 {
     [HttpPost]

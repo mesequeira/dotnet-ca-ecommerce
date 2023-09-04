@@ -9,24 +9,27 @@ namespace WebApi.Controllers.Orders;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class OrdersController : ApplicationBaseController
 {
+    [Authorize(Roles = "Customer")]
     [HttpPost]
     [ProducesResponseType(typeof(Response), StatusCodes.Status200OK)]
     public async Task<IActionResult> Create([FromBody] CreateOrderCommand command) =>
         Ok(await Mediator.Send(command));
 
+    [Authorize(Roles = "Administrator")]
     [HttpPut]
     [ProducesResponseType(typeof(Response), StatusCodes.Status200OK)]
     public async Task<IActionResult> Update([FromBody] UpdateOrderCommand command) =>
         Ok(await Mediator.Send(command));
 
+    [Authorize(Roles = "Customer")]
     [HttpGet]
     [ProducesResponseType(typeof(Response<GetOrderQueryResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get([FromQuery] GetOrderQuery query) =>
         Ok(await Mediator.Send(query));
 
+    [Authorize(Roles = "Administrator")]
     [HttpGet("all")]
     [ProducesResponseType(typeof(Response<GetAllOrdersQueryResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll([FromQuery] GetAllOrdersQuery query) =>

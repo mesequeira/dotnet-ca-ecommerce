@@ -1,19 +1,18 @@
 ﻿using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Orders;
 using Domain.Repositories.Orders;
-using Microsoft.Extensions.Logging;
 
 namespace Application.UseCase.Orders.Commands.Create;
 
 internal sealed class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response>
 {
-    private readonly ILogger<CreateOrderCommandHandler> _logger;
+    private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IOrderRepository _orderRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateOrderCommandHandler(
-        ILogger<CreateOrderCommandHandler> logger,
+        ILogger logger,
         IMapper mapper,
         IOrderRepository orderRepository,
         IUnitOfWork unitOfWork)
@@ -32,7 +31,7 @@ internal sealed class CreateOrderCommandHandler : IRequestHandler<CreateOrderCom
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation($"Order with id {order.Id} was created.");
+        _logger.Information("Order with id {0} was created.", order.Id);
 
         return new Response
         {
