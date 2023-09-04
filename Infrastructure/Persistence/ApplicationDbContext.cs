@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.Categories;
 using Domain.Entities.Customers;
+using Domain.Entities.Customers.Roles;
 using Domain.Entities.Orders;
 using Domain.Entities.Orders.Items;
 using Domain.Entities.Payments;
@@ -25,6 +26,7 @@ internal sealed class ApplicationDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Payment> Payments { get; set; }
+    public DbSet<Rol> Roles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

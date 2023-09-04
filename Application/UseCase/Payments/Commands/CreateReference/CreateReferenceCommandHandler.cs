@@ -36,7 +36,7 @@ internal sealed class CreateReferenceCommandHandler : IRequestHandler<CreateRefe
 
         var referenceId = await _paymentService.CreateReferenceAsync(items);
 
-        _logger.Information($"Reference with id {referenceId} was created.");
+        _logger.Information("Reference with id {0} was created.", referenceId);
 
         response.StatusCode = HttpStatusCode.Created;
         response.Content = referenceId;

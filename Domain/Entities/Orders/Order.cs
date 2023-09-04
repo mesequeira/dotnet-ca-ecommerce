@@ -1,8 +1,8 @@
 ﻿using Domain.Entities.Customers;
 using Domain.Entities.Orders.Items;
-using Domain.Entities.Payments;
 
 namespace Domain.Entities.Orders;
+
 
 public class Order : BaseAuditableEntity
 {

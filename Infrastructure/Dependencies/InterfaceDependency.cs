@@ -6,11 +6,13 @@ using Domain.Repositories.Customers;
 using Domain.Repositories.Discounts;
 using Domain.Repositories.Orders;
 using Domain.Repositories.Products;
+using Domain.Repositories.Roles;
 using Infrastructure.Repositories.Categories;
 using Infrastructure.Repositories.Customers;
 using Infrastructure.Repositories.Discounts;
 using Infrastructure.Repositories.Orders;
 using Infrastructure.Repositories.Products;
+using Infrastructure.Repositories.Roles;
 using Infrastructure.Services.Authentication;
 using Infrastructure.Services.Payments;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,7 @@ public static class InterfaceDependency
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IPaymentService, PaymentService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IRolesRepository, RolesRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }

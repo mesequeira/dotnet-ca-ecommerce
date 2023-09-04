@@ -6,7 +6,7 @@ namespace WebApi.Controllers.Categories;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Administrator")]
 public class CategoriesController : ApplicationBaseController
 {
 
