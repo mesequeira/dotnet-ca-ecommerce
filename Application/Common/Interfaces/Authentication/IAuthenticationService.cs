@@ -2,5 +2,5 @@
 
 public interface IAuthenticationService
 {
-    object RegisterAsync(string email);
+    Task<string> CreateTokenJwt(string email);
 }

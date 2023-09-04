@@ -10,7 +10,7 @@ namespace WebApi.Controllers.Products;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Administrator")]
 public class ProductsController : ApplicationBaseController
 {
     [HttpPost]

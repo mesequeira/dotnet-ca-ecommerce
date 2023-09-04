@@ -2,20 +2,18 @@
 using Domain.Abstractions.UnitOfWork;
 using Domain.Entities.Products;
 using Domain.Repositories.Products;
-using Domain.Shared;
-using Microsoft.Extensions.Logging;
 
 namespace Application.UseCase.Products.Commands.Create;
 
 internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response>
 {
-    private readonly ILogger<CreateProductCommandHandler> _logger;
+    private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateProductCommandHandler(
-        ILogger<CreateProductCommandHandler> logger, 
+        ILogger logger, 
         IMapper mapper, 
         IProductRepository productRepository, 
         IUnitOfWork unitOfWork)
@@ -34,7 +32,7 @@ internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProduc
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation($"Product with id {product.Id} was created.");
+        _logger.Information($"Product with id {0} was created.", product.Id);
 
         return new Response()
         {

@@ -6,7 +6,7 @@ namespace WebApi.Controllers.Discounts;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Administrator")]
 public class DiscountsController : ApplicationBaseController
 {
 
